@@ -10,10 +10,6 @@ const RestaurantSchema = new Schema ({
         type: String,
         required: true
     },
-    menuitems: [{
-        type: Schema.Types.ObjectId,
-        ref: 'menuitem'
-    }],
     deliverers: [{
         type: Schema.Types.ObjectId,
         ref: 'deliverer'
