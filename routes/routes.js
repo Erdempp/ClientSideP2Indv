@@ -1,6 +1,7 @@
 const RestaurantController = require('../controllers/restaurantcontroller');
 const MenuItemController = require('../controllers/menuitemcontroller')
 const DelivererController = require('../controllers/deliverercontroller')
+const OrderController = require('../controllers/ordercontroller')
 
 module.exports = (app) => {
     //Restaurant endpoints
@@ -23,4 +24,10 @@ module.exports = (app) => {
     app.post('/api/restaurants/:id/deliverers', DelivererController.createDeliverer);
     app.put('/api/deliverers/:id', DelivererController.editDeliverer);
     app.delete('/api/deliverers/:id', DelivererController.deleteDeliverer);
+
+    //Order endpoints
+    app.get('/api/restaurants/:id/orders', OrderController.getOrders);
+    app.get('/api/orders/:id', OrderController.getOrder);
+    app.post('/api/restaurants/:id/orders', OrderController.createOrder);
+    app.delete('/api/orders/:id', OrderController.deleteOrder);
 }

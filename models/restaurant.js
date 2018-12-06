@@ -19,8 +19,6 @@ const RestaurantSchema = new Schema ({
 //         .then(() => next());
 // });
 
-// ThreadSchema.set('toObject', { getters: true });
-
 const Restaurant = mongoose.model('restaurant', RestaurantSchema);
 
 module.exports = Restaurant;
