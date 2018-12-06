@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const MenuItem = require('../models/menuitem')
+const MenuItem = require('../models/menuitem');
 
 const OrderSchema = new Schema ({
     name: {
@@ -11,7 +11,10 @@ const OrderSchema = new Schema ({
         type: Number,
         required: true
     },
-    orderItems: [MenuItem],
+    orderItems: [{
+        type: Schema.Types.ObjectId,
+        ref: 'menuitem'
+    }],
     totalPrice: {
         type: Number,
         required: true
@@ -26,7 +29,7 @@ const OrderSchema = new Schema ({
     },
     deliverer: {
         type: Schema.Types.ObjectId,
-        ref: 'deliverer'        
+        ref: 'deliverer'
     },
     restaurant: {
         type: Schema.Types.ObjectId,
