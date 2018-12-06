@@ -4,21 +4,35 @@ const Restaurant = require('../models/restaurant')
 
 module.exports =  {
     getMenuItems(req, res, next) {
-        MenuItem.find({}, {__v: 0})
-            .then((menuItems) => {
-                let menuItemArray = [];
-                menuItems.forEach(menuItem => {
-                    let menuItemResponse = {
-                        _id: menuItem._id,
-                        name: menuItem.name,
-                        amount: menuItem.amount,
-                        available: menuItem.available,
-                        restaurant: menuItem.restaurant //Populate?
+        const restaurantId = req.params.id;
+        const validObjectId = mongoose.Types.ObjectId.isValid(restaurantId);
+
+        if(validObjectId) {
+            Restaurant.findById(restaurantId)
+                .then((restaurant) => {
+                    if(restaurant !== null) {
+                        MenuItem.find({ restaurant: restaurant })
+                        .then((menuItems) => {
+                            let menuItemArray = [];
+                            menuItems.forEach(menuItem => {
+                                let menuItemResponse = {
+                                    _id: menuItem._id,
+                                    name: menuItem.name,
+                                    amount: menuItem.amount,
+                                    available: menuItem.available,
+                                    restaurant: menuItem.restaurant //Populate?
+                                }
+                                menuItemArray.push(menuItemResponse);
+                            })
+                            res.status(200).send(menuItemArray);
+                        }).catch(next);
+                    } else {
+                        res.status(404).send({ Error: 'This restaurant does not exist'});
                     }
-                    menuItemArray.push(menuItemResponse);
-                })
-                res.status(200).send(menuItemArray);
-            }).catch(next);
+                }).catch(next);
+        } else {
+            res.status(422).send({ Error: 'This restaurant does not exist'});
+        }
     },
 
     getMenuItem(req, res, next) {
@@ -26,7 +40,7 @@ module.exports =  {
         const validObjectId = mongoose.Types.ObjectId.isValid(menuItemId);
 
         if(validObjectId) {
-            MenuItem.findById(menuItemId, {__v: 0})
+            MenuItem.findById(menuItemId)
                 .then((menuItem) => {
                     if(menuItem !== null) {
                         let menuItemResponse = {
@@ -89,7 +103,6 @@ module.exports =  {
                 MenuItem.findOne({ _id: menuItemId })
                 .then((menuItem) => {
                     if(menuItem !== null) {
-                        console.log('Menu item exists');
                         MenuItem.findOne({ name: menuItemProps.name, amount: menuItemProps.amount, available: menuItemProps.available, restaurant: menuItem.restaurant })
                             .then((menuItemCheck) => {
                                 if(menuItemCheck === null) {

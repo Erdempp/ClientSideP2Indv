@@ -3,7 +3,7 @@ const Restaurant = require('../models/restaurant');
 
 module.exports =  {
     getRestaurants(req, res, next) {
-        Restaurant.find({}, {__v: 0})
+        Restaurant.find()
             .then((restaurants) => {
                 let restaurantArray = [];
                 restaurants.forEach(restaurant => {
@@ -25,7 +25,7 @@ module.exports =  {
         const validObjectId = mongoose.Types.ObjectId.isValid(restaurantId);
 
         if(validObjectId) {
-            Restaurant.findById(restaurantId, {__v: 0})
+            Restaurant.findById(restaurantId)
                 .then((restaurant) => {
                     if(restaurant !== null) {
                         let restaurantResponse = {

@@ -9,11 +9,7 @@ const RestaurantSchema = new Schema ({
     address: {
         type: String,
         required: true
-    },
-    deliverers: [{
-        type: Schema.Types.ObjectId,
-        ref: 'deliverer'
-    }]
+    }
 });
 
 // ThreadSchema.pre('remove', function(next) {
