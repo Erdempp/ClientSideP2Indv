@@ -1,0 +1,21 @@
+<!-- <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()">
+  
+  <label>
+    Name:
+    <input type="text" formControlName="name">
+  </label>
+
+  <label>
+    Address:
+    <input type="text" formControlName="address">
+  </label>
+
+  <button type="submit" [disabled]="!restaurantForm.valid">Submit</button>
+</form> -->
+
+<button (click)="getRestaurants()">Get</button>
+
+<div *ngFor="let restaurant of restaurants | async">
+  {{ restaurant | json }}
+</div>
+
