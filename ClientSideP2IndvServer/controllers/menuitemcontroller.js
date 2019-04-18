@@ -20,8 +20,7 @@ module.exports =  {
                                     name: menuItem.name,
                                     price: menuItem.price,
                                     amount: menuItem.amount,
-                                    available: menuItem.available,
-                                    restaurant: menuItem.restaurant //Populate?
+                                    available: menuItem.available
                                 }
                                 menuItemArray.push(menuItemResponse);
                             })
@@ -32,7 +31,7 @@ module.exports =  {
                     }
                 }).catch(next);
         } else {
-            res.status(422).send({ Error: 'This restaurant does not exist'});
+            res.status(404).send({ Error: 'This restaurant does not exist'});
         }
     },
 
@@ -49,8 +48,7 @@ module.exports =  {
                             name: menuItem.name,
                             price: menuItem.price,
                             amount: menuItem.amount,
-                            available: menuItem.available,
-                            restaurant: menuItem.restaurant //Populate?
+                            available: menuItem.available
                         }
                         res.status(200).send(menuItemResponse);
                     } else {
@@ -58,7 +56,7 @@ module.exports =  {
                     }
                 }).catch(next);
         } else {
-            res.status(422).send({ Error: 'This menu item does not exist'});
+            res.status(404).send({ Error: 'This menu item does not exist'});
         }
     },
 
@@ -91,7 +89,7 @@ module.exports =  {
                 res.status(422).send({ Error: 'Invalid menu item properties'})
             }
         } else {
-            res.status(422).send({ Error: 'This restaurant does not exist'});
+            res.status(404).send({ Error: 'This restaurant does not exist'});
         }
     },
 
@@ -143,7 +141,7 @@ module.exports =  {
                     }
                 }).catch(next);
         } else {
-            res.status(422).send({ Error: 'This menu item does not exist'});
+            res.status(404).send({ Error: 'This menu item does not exist'});
         }
     }
 };

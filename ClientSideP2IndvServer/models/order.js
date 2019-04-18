@@ -19,18 +19,18 @@ const OrderSchema = new Schema ({
         type: Number,
         required: true
     },
-    paid: {
-        type: Boolean,
-        required: true
-    },
-    delivered: {
-        type: Boolean,
-        required: true
-    },
-    deliverer: {
-        type: Schema.Types.ObjectId,
-        ref: 'deliverer'
-    },
+    // paid: {
+    //     type: Boolean,
+    //     required: true
+    // },
+    // delivered: {
+    //     type: Boolean,
+    //     required: true
+    // },
+    // deliverer: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'deliverer'
+    // },
     restaurant: {
         type: Schema.Types.ObjectId,
         ref: 'restaurant'

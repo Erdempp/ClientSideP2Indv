@@ -21,10 +21,8 @@ module.exports =  {
                                     address: order.address,
                                     orderItems: order.orderItems,
                                     totalPrice: order.totalPrice,
-                                    paid: order.paid,
-                                    delivered: order.delivered,
-                                    deliverer: order.deliverer, //Populate?
-                                    restaurant: order.restaurant //Populate?
+                                    // paid: order.paid,
+                                    // delivered: order.delivered
                                 }
                                 orderArray.push(orderResponse);
                             })
@@ -35,7 +33,7 @@ module.exports =  {
                     }
                 }).catch(next);
         } else {
-            res.status(422).send({ Error: 'This restaurant does not exist'});
+            res.status(404).send({ Error: 'This restaurant does not exist'});
         }
     },
 
@@ -53,10 +51,8 @@ module.exports =  {
                             address: order.address,
                             orderItems: order.orderItems,
                             totalPrice: order.totalPrice,
-                            paid: order.paid,
-                            delivered: order.delivered,
-                            deliverer: order.deliverer, //Populate?
-                            restaurant: order.restaurant //Populate?
+                            // paid: order.paid,
+                            //delivered: order.delivered
                         }
                         res.status(200).send(orderResponse);
                     } else {
@@ -64,7 +60,7 @@ module.exports =  {
                     }
                 }).catch(next);
         } else {
-            res.status(422).send({ Error: 'This order does not exist'});
+            res.status(404).send({ Error: 'This order does not exist'});
         }
     },
 
@@ -90,7 +86,7 @@ module.exports =  {
                 res.status(422).send({ Error: 'Invalid order properties'})
             }
         } else {
-            res.status(422).send({ Error: 'This restaurant does not exist'});
+            res.status(404).send({ Error: 'This restaurant does not exist'});
         }
     },
 
@@ -111,7 +107,7 @@ module.exports =  {
                     }
                 }).catch(next);
         } else {
-            res.status(422).send({ Error: 'This order does not exist'});
+            res.status(404).send({ Error: 'This order does not exist'});
         }
     }
 };

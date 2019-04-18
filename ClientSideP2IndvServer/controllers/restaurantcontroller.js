@@ -11,8 +11,7 @@ module.exports =  {
                         _id: restaurant._id,
                         name: restaurant.name,
                         address: restaurant.address,
-                        menuitems: restaurant.menuitems,
-                        deliverers: restaurant.deliverers
+                        // menuitems: restaurant.menuitems
                     }
                     restaurantArray.push(restaurantResponse);
                 })
@@ -32,8 +31,7 @@ module.exports =  {
                             _id: restaurant._id,
                             name: restaurant.name,
                             address: restaurant.address,
-                            menuitems: restaurant.menuitems,
-                            deliverers: restaurant.deliverers
+                            // menuitems: restaurant.menuitems
                         }
                         res.status(200).send(restaurantResponse);
                     } else {
@@ -41,7 +39,7 @@ module.exports =  {
                     }
                 }).catch(next);
         } else {
-            res.status(422).send({ Error: 'This restaurant does not exist'});
+            res.status(404).send({ Error: 'This restaurant does not exist'});
         }
     },
 
@@ -49,7 +47,7 @@ module.exports =  {
         const restaurantProps = req.body;
 
         if(restaurantProps.name && restaurantProps.address) {
-            Restaurant.findOne({ name: restaurantProps.name })
+            Restaurant.findOne({ name: restaurantProps.name, address: restaurantProps.address })
             .then((restaurant) => {
                 if(restaurant == null) {
                     Restaurant.create(restaurantProps)
@@ -57,7 +55,7 @@ module.exports =  {
                             res.status(200).send({ Message: 'Restaurant successfully created'});
                         }).catch(next);
                 } else {
-                    res.status(409).send({ Error: 'A restaurant with this name already exists'})
+                    res.status(409).send({ Error: 'A restaurant with this name and address already exists'})
                 }
             }).catch(next);
         } else {
@@ -87,7 +85,7 @@ module.exports =  {
                 res.status(422).send({ Error: 'Invalid restaurant properties'})
             }
         } else {
-            res.status(422).send({ Error: 'This restaurant does not exist'});
+            res.status(404).send({ Error: 'This restaurant does not exist'});
         }
     },
 
@@ -108,7 +106,7 @@ module.exports =  {
                     }
                 }).catch(next);
         } else {
-            res.status(422).send({ Error: 'This restaurant does not exist'});
+            res.status(404).send({ Error: 'This restaurant does not exist'});
         }
     }
 };
