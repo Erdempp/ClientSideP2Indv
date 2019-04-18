@@ -1,9 +1,13 @@
+const UserController = require('../controllers/usercontroller');
 const RestaurantController = require('../controllers/restaurantcontroller');
-const MenuItemController = require('../controllers/menuitemcontroller')
-const DelivererController = require('../controllers/deliverercontroller')
-const OrderController = require('../controllers/ordercontroller')
+const MenuItemController = require('../controllers/menuitemcontroller');
+const OrderController = require('../controllers/ordercontroller');
 
 module.exports = (app) => {
+    //User endpoint
+    app.post('/api/register', UserController.register);
+    app.post('/api/login', UserController.login);
+    
     //Restaurant endpoints
     app.get('/api/restaurants', RestaurantController.getRestaurants);
     app.get('/api/restaurants/:id', RestaurantController.getRestaurant);
@@ -17,13 +21,6 @@ module.exports = (app) => {
     app.post('/api/restaurants/:id/menuitems', MenuItemController.createMenuItem);
     app.put('/api/menuitems/:id', MenuItemController.editMenuItem);
     app.delete('/api/menuitems/:id', MenuItemController.deleteMenuItem);
-
-    //Deliverer endpoints
-    app.get('/api/restaurants/:id/deliverers', DelivererController.getDeliverers);
-    app.get('/api/deliverers/:id', DelivererController.getDeliverer);
-    app.post('/api/restaurants/:id/deliverers', DelivererController.createDeliverer);
-    app.put('/api/deliverers/:id', DelivererController.editDeliverer);
-    app.delete('/api/deliverers/:id', DelivererController.deleteDeliverer);
 
     //Order endpoints
     app.get('/api/restaurants/:id/orders', OrderController.getOrders);
