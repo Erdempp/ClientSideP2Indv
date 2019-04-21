@@ -7,9 +7,14 @@ const app = express();
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true); //collection.ensureIndex deprication warning
 
-
-mongoose.connect('mongodb://localhost/deliverydb', {useNewUrlParser: true}); //URL string parser is deprecated, using new one.
-console.log("Successfully connected to MongoDB")
+if(process.env.NODE_ENV == 'testCloud' || process.env.NODE_ENV == 'production') {
+    mongoose.connect('mongodb+srv://dbUser:<password>@restaurantdb-mtjqd.mongodb.net/test?retryWrites=true', {useNewUrlParser: true});
+    console.log("Successfully connected to online MongoDB");
+}
+else if(process.env.NODE_ENV == 'test'){
+    mongoose.connect('mongodb://localhost/deliverydb', {useNewUrlParser: true});
+    console.log("Successfully connected to local MongoDB");
+}
 
 app.all('*', function(req, res, next){
     next();
