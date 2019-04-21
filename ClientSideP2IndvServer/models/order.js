@@ -7,6 +7,10 @@ const OrderSchema = new Schema ({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true
+    },
     address: {
         type: Number,
         required: true
@@ -15,21 +19,9 @@ const OrderSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'menuitem'
     }],
-    totalPrice: {
-        type: Number,
-        required: true
-    },
-    // paid: {
-    //     type: Boolean,
+    // totalPrice: {
+    //     type: Number,
     //     required: true
-    // },
-    // delivered: {
-    //     type: Boolean,
-    //     required: true
-    // },
-    // deliverer: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'deliverer'
     // },
     restaurant: {
         type: Schema.Types.ObjectId,

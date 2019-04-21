@@ -10,14 +10,6 @@ const MenuItemSchema = new Schema ({
         type: Number,
         required: true
     },
-    amount: {
-        type: Number,
-        required: true
-    },
-    available: {
-        type: Boolean,
-        required: true
-    },
     restaurant: {
         type: Schema.Types.ObjectId,
         ref: 'restaurant'

@@ -18,9 +18,7 @@ module.exports =  {
                                 let menuItemResponse = {
                                     _id: menuItem._id,
                                     name: menuItem.name,
-                                    price: menuItem.price,
-                                    amount: menuItem.amount,
-                                    available: menuItem.available
+                                    price: menuItem.price
                                 }
                                 menuItemArray.push(menuItemResponse);
                             })
@@ -46,9 +44,7 @@ module.exports =  {
                         let menuItemResponse = {
                             _id: menuItem._id,
                             name: menuItem.name,
-                            price: menuItem.price,
-                            amount: menuItem.amount,
-                            available: menuItem.available
+                            price: menuItem.price
                         }
                         res.status(200).send(menuItemResponse);
                     } else {
@@ -66,14 +62,14 @@ module.exports =  {
         const validObjectId = mongoose.Types.ObjectId.isValid(restaurantId);
 
         if(validObjectId) {
-            if(menuItemProps.name && menuItemProps.price && menuItemProps.amount && menuItemProps.available !== null) {
+            if(menuItemProps.name && menuItemProps.price !== null) {
                 Restaurant.findById(restaurantId)
                     .then((restaurant) => {
                         if(restaurant !== null) {
                             MenuItem.findOne({ name: menuItemProps.name, restaurant: restaurant })
                                 .then((menuItem) => {
                                     if(menuItem === null) {
-                                        MenuItem.create({ name: menuItemProps.name, price: menuItemProps.price, amount: menuItemProps.amount, available: menuItemProps.available, restaurant: restaurant })
+                                        MenuItem.create({ name: menuItemProps.name, price: menuItemProps.price, restaurant: restaurant })
                                             .then(() => {
                                                 res.status(200).send({ Message: 'Menu item successfully added'})
                                             }).catch(next);
@@ -99,14 +95,14 @@ module.exports =  {
         const validObjectId = mongoose.Types.ObjectId.isValid(menuItemId);
     
         if(validObjectId) {
-            if(menuItemProps.name && menuItemProps.amount && menuItemProps.available !== null) {
+            if(menuItemProps.name && menuItemProps.price !== null) {
                 MenuItem.findOne({ _id: menuItemId })
                 .then((menuItem) => {
                     if(menuItem !== null) {
-                        MenuItem.findOne({ name: menuItemProps.name, price: menuItemProps.price, amount: menuItemProps.amount, available: menuItemProps.available, restaurant: menuItem.restaurant })
+                        MenuItem.findOne({ name: menuItemProps.name, price: menuItemProps.price, restaurant: menuItem.restaurant })
                             .then((menuItemCheck) => {
                                 if(menuItemCheck === null) {
-                                    MenuItem.findByIdAndUpdate(menuItemId, { name: menuItemProps.name, price: menuItemProps.price, amount: menuItemProps.amount, available: menuItemProps.available })
+                                    MenuItem.findByIdAndUpdate(menuItemId, { name: menuItemProps.name, price: menuItemProps.price })
                                         .then(() => {
                                             res.status(200).send({ Message: 'Successfully updated menu item' })
                                         })

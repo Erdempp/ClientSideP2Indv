@@ -9,6 +9,10 @@ const RestaurantSchema = new Schema ({
     address: {
         type: String,
         required: true
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     }
 });
 
