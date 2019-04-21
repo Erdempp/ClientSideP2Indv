@@ -1,0 +1,24 @@
+{
+  "name": "clientsidep2indv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "set NODE_ENV=test&& nodemon --exec mocha --recursive -R min",
+    "start": "set NODE_ENV=production&& node index.js",
+    "testCloud": "set NODE_ENV=testCloud&& nodemon --exec mocha --recursive -R min"
+  },
+  "engines":{
+    "node": "8.11.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.3.14",
+    "nodemon": "^1.18.7"
+  }
+}
