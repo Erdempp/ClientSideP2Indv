@@ -1,3 +1,17 @@
-<p>
-  restaurant works!
-</p>
+<h1 mat-dialog-title>Selecteer een vaardigheid om toe te voegen aan je profiel</h1>
+<div mat-dialog-content></div>
+<mat-radio-group class="skill-radio-group" [(ngModel)]="selectedOption" (ngModelChange)="onNgModelChange($event)">
+  <mat-radio-button class="skill-radio-button" *ngFor="let skill of skills" [value]="skill">
+    {{skill.name}}
+  </mat-radio-button>
+
+  <mat-select class="levelDropdown" [(ngModel)]="selectedLevel" (ngModelChange)="onNgLevelModelChange($event)" placeholder="Selecteer een level">
+    <mat-option *ngFor="let level of levels" [value]="level">{{level.name}}</mat-option>
+  </mat-select>
+
+</mat-radio-group>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Sluit</button>
+  <button mat-raised-button color="primary" (click)="onAddClick()" cdkFocusInitial>Voeg toe aan profiel</button>
+  <!-- [mat-dialog-close]="" -->
+</div>
